@@ -1,0 +1,10 @@
+# terraform
+.terraform*
+tfplan
+*.pem
+
+# secrets
+.env
+
+main.tf.example
+

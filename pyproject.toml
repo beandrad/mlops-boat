@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "mlops-boat"
+version = "0.1.0"
+description = ""
+authors = ["Isabel Andrade <beandrad@microsoft.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+environs = "*"
+
+[tool.poetry.dev-dependencies]
+invoke = "*"
+black = "*"
+isort = "*"
+mypy = "*"
+flake8 = "*"
+pyproject-flake8 = "*"
+pylint = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line_length = 110
+
+[tool.isort]
+known_first_party = ["ds", "routers", "src", "ml_service"]
+multi_line_output = 3
+include_trailing_comma = true
+line_length = 110
+
+[tool.mypy]
+strict = true
+implicit_reexport = true
+pretty = true
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unreachable = true
+allow_redefinition = true
+show_error_codes = true
+disallow_untyped_defs = true
+disallow_any_generics = false
+warn_return_any = false
+namespace_packages = true
+disallow_untyped_decorators = false
+disallow_subclassing_any = false
+explicit_package_bases = true
+
+[tool.flake8]
+max-line-length = 110
+max-complexity = 10
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = "missing-class-docstring,missing-function-docstring,missing-module-docstring,wrong-import-order,import-error,duplicate-code,no-name-in-module"
+
+[tool.pylint.'BASIC']
+include-naming-hint = true
+variable-rgx = "^[a-z][a-z0-9]*(([_a-z0-9]+)*)?$"
+variable-name-hint= "^[a-z][a-z0-9]*(([_a-z0-9]+)*)?$"
+argument-name= "^[a-z][a-z0-9]*(([_a-z0-9]+)*)?$"
+good-names = "mlops-boat,tf"
+
+[tool.pylint.'FORMAT']
+max-line-length = 110
+
+[tool.pylint.'DESIGN']
+# Maximum number of arguments for method
+max-args=10
+
+# Maximum number of attributes for a class (see R0902).
+max-attributes=20
