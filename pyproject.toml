@@ -5,7 +5,7 @@ description = ""
 authors = ["Isabel Andrade <beandrad@microsoft.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 environs = "*"
 
 [tool.poetry.dev-dependencies]
