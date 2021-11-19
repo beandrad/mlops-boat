@@ -25,9 +25,10 @@ Install pre-requisites:
 - Poetry (Python package manager).
 - Terraform v1.0 or above.
 
-Create Python virtual environment and install dependencies:
+Create Python virtual environment, install dependencies and activate virtual environment:
 ```bash
 poetry install
+source `poetry env info --path`/bin/activate
 ```
 
 ## Dependency management
