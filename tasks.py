@@ -17,6 +17,8 @@ ROOT_DIR = Path(__file__).parent
 INFRA_DIR = ROOT_DIR.joinpath("infra")
 LINE_LENGTH = 110
 
+TF_MODULES = ["hub", "mlops"]
+
 
 @task(
     help={
@@ -77,51 +79,76 @@ def clean(runner):  # type: ignore
         runner.run(f"find . -name {pattern} -exec rm -rf {{}} +", pty=True)
 
 
-@task
-def tf_init(runner):  # type: ignore # pylint: disable=unused-argument
+@task(
+    help={
+        "module": f"Terraform module; possible values: {TF_MODULES}"
+    }
+)
+def tf_init(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf init
     """
+    if module not in TF_MODULES:
+        raise ValueError(f"Module should be any of {TF_MODULES}")
+
     ctx = Context()
-    with ctx.cd("./infra"):
+    with ctx.cd(f"./infra/{module}"):
         ctx.run(
             f"""
             terraform init -upgrade \
                 -backend-config=resource_group_name={env('TF_STATE_RESOURCE_GROUP_NAME')} \
                 -backend-config=storage_account_name={env('TF_STATE_SA_NAME')} \
-                -backend-config=key={env('ENVIRONMENT')}-update.tfstate \
-                -backend-config=container_name={env('TF_STATE_CONTAINER_NAME')} -reconfigure"""
+                -backend-config=container_name={env('TF_STATE_CONTAINER_NAME')} -reconfigure \
+                -backend-config=key={env('ENVIRONMENT')}-{module}-update.tfstate"""
         )
 
 
-@task
-def tf_plan(runner):  # type: ignore # pylint: disable=unused-argument
+@task(
+    help={
+        "module": f"Terraform module; possible values: {TF_MODULES}"
+    }
+)
+def tf_plan(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf plan
     """
+    if module not in TF_MODULES:
+        raise ValueError(f"Module should be any of {TF_MODULES}")
     ctx = Context()
-    with ctx.cd("./infra"):
+    with ctx.cd(f"./infra/{module}"):
         ctx.run(
             f"""terraform plan -input=false \
                 -var-file="./config/{env('ENVIRONMENT')}.tfvars" -out=tfplan -parallelism=30"""
         )
 
 
-@task
-def tf_apply(runner):  # type: ignore # pylint: disable=unused-argument
+@task(
+    help={
+        "module": f"Terraform module; possible values: {TF_MODULES}"
+    }
+)
+def tf_apply(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf apply
     """
+    if module not in TF_MODULES:
+        raise ValueError(f"Module should be any of {TF_MODULES}")
     ctx = Context()
-    with ctx.cd("./infra"):
+    with ctx.cd(f"./infra/{module}"):
         ctx.run("""terraform apply -auto-approve -parallelism=30 tfplan""")
 
 
-@task
-def tf_destroy(runner):  # type: ignore # pylint: disable=unused-argument
+@task(
+    help={
+        "module": f"Terraform module; possible values: {TF_MODULES}"
+    }
+)
+def tf_destroy(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf destroy
     """
+    if module not in TF_MODULES:
+        raise ValueError(f"Module should be any of {TF_MODULES}")
     ctx = Context()
-    with ctx.cd("./infra"):
+    with ctx.cd(f"./infra/{module}"):
         ctx.run(f"""terraform destroy -var-file="./config/{env('ENVIRONMENT')}.tfvars" """)

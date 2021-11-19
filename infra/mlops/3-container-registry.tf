@@ -32,7 +32,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "acr" {
   name                  = azurecaf_name.acr.results["azurerm_private_dns_zone_virtual_network_link"]
   resource_group_name   = azurerm_resource_group.rg.name
   private_dns_zone_name = azurerm_private_dns_zone.acr.name
-  virtual_network_id    = azurerm_virtual_network.net.id
+  virtual_network_id    = data.azurerm_virtual_network.net.id
 }
 
 resource "azurerm_private_endpoint" "acr" {
