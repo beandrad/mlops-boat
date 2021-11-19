@@ -27,12 +27,6 @@ variable "location" {
   default     = "uksouth"
 }
 
-# variable "vnet_address_space" {
-#   description = "IP address space for the vnet"
-#   type        = list(string)
-#   default     = ["10.0.0.0/16"]
-# }
-
 variable "hub_rg_name" {
   description = "Hub resource group name"
   type        = string
@@ -47,12 +41,4 @@ variable "subnet_address_space" {
   description = "IP address space for the subnet"
   type        = list(string)
   default     = ["10.0.2.0/24"]
-}
-
-# TODO: the build agent should be in the same vnet;
-# the vnet should be an input.
-variable "build_agent_ip" {
-  description = "IP of agent provisioning infra"
-  type        = string
-  default     = "82.1.101.43"
 }

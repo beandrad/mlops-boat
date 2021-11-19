@@ -22,7 +22,6 @@ resource "azurerm_key_vault" "kv" {
   network_acls {
     default_action = "Deny"
     bypass         = "AzureServices"
-    ip_rules       = [var.build_agent_ip]
   }
 
   access_policy {
@@ -66,14 +65,14 @@ resource "azurerm_private_dns_zone_virtual_network_link" "kv" {
   name                  = azurecaf_name.kv-pe.results["azurerm_private_dns_zone_virtual_network_link"]
   resource_group_name   = azurerm_resource_group.rg.name
   private_dns_zone_name = azurerm_private_dns_zone.kv.name
-  virtual_network_id    = azurerm_virtual_network.net.id
+  virtual_network_id    = data.azurerm_virtual_network.net.id
 }
 
 resource "azurerm_private_endpoint" "kv" {
   name                = azurecaf_name.kv-pe.results["azurerm_private_endpoint"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = data.azurerm_subnet.net.id
+  subnet_id           = azurerm_subnet.net.id
 
   private_service_connection {
     name                           = azurecaf_name.kv-pe.results["azurerm_private_endpoint"]
