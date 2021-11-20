@@ -45,4 +45,4 @@ When running `poetry install`, if a `poetry.lock` exists in the project, the pac
 
 This section describes future work and blockers/issues that need to be solved.
 
-- Enable App Insights. The connection to App Insights should be private; for that we need to deploy an Azure Monitor Private Link Scope, not available in the Terraform provider yet (see [issue#10059](https://github.com/hashicorp/terraform-provider-azurerm/issues/10059)).
+- Enable App Insights. The connection to App Insights should be private; for that we need to deploy an [Azure Monitor Private Link Scope](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/private-link-security), not available in the Terraform provider yet (see [issue#10059](https://github.com/hashicorp/terraform-provider-azurerm/issues/10059)).
