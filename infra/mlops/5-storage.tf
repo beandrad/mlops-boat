@@ -1,7 +1,7 @@
 resource "azurecaf_name" "sa" {
-  name     = "${var.name}"
-  prefixes = var.prefixes
-  suffixes = var.suffixes
+  name          = var.name
+  prefixes      = var.prefixes
+  suffixes      = var.suffixes
   resource_type = "azurerm_storage_account"
   random_length = var.random_length
 }
@@ -14,8 +14,8 @@ resource "azurerm_storage_account" "sa" {
   account_replication_type = "GRS"
 
   network_rules {
-    default_action             = "Deny"
-    bypass                     = ["Logging", "Metrics", "AzureServices"]
+    default_action = "Deny"
+    bypass         = ["Logging", "Metrics", "AzureServices"]
   }
 }
 

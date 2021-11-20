@@ -40,3 +40,9 @@ To add a new dependency, execute `poetry add <package name>="<version>"`; in gen
 You can also indicate that a dependency should be only installed in `dev` (for instance, the linters - mypy or flake8), for that add the `--dev` parameter: `poetry add --dev <package name>="<version>"`.
 
 When running `poetry install`, if a `poetry.lock` exists in the project, the packages pinned to the versions in that file will be installed.
+
+## Issues
+
+This section describes future work and blockers/issues that need to be solved.
+
+- Enable App Insights. The connection to App Insights should be private; for that we need to deploy an Azure Monitor Private Link Scope, not available in the Terraform provider yet (see [issue#10059](https://github.com/hashicorp/terraform-provider-azurerm/issues/10059)).

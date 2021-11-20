@@ -79,11 +79,7 @@ def clean(runner):  # type: ignore
         runner.run(f"find . -name {pattern} -exec rm -rf {{}} +", pty=True)
 
 
-@task(
-    help={
-        "module": f"Terraform module; possible values: {TF_MODULES}"
-    }
-)
+@task(help={"module": f"Terraform module; possible values: {TF_MODULES}"})
 def tf_init(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf init
@@ -103,11 +99,7 @@ def tf_init(runner, module):  # type: ignore # pylint: disable=unused-argument
         )
 
 
-@task(
-    help={
-        "module": f"Terraform module; possible values: {TF_MODULES}"
-    }
-)
+@task(help={"module": f"Terraform module; possible values: {TF_MODULES}"})
 def tf_plan(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf plan
@@ -122,11 +114,7 @@ def tf_plan(runner, module):  # type: ignore # pylint: disable=unused-argument
         )
 
 
-@task(
-    help={
-        "module": f"Terraform module; possible values: {TF_MODULES}"
-    }
-)
+@task(help={"module": f"Terraform module; possible values: {TF_MODULES}"})
 def tf_apply(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf apply
@@ -138,11 +126,7 @@ def tf_apply(runner, module):  # type: ignore # pylint: disable=unused-argument
         ctx.run("""terraform apply -auto-approve -parallelism=30 tfplan""")
 
 
-@task(
-    help={
-        "module": f"Terraform module; possible values: {TF_MODULES}"
-    }
-)
+@task(help={"module": f"Terraform module; possible values: {TF_MODULES}"})
 def tf_destroy(runner, module):  # type: ignore # pylint: disable=unused-argument
     """
     Run tf destroy
