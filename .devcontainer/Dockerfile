@@ -65,8 +65,10 @@ RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN az extension add -n ml -y
 
 # Install dotnet-runtime - required for azureml datastore (https://github.com/microsoft/MLOpsPython/issues/295)
-RUN curl -sSL -o packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb \
-    && dpkg -i packages-microsoft-prod.deb \
-    && apt-get update && apt-get install -y --no-install-recommends dotnet-runtime-2.1
+RUN mkdir -p /tmp/docker-downloads \
+    && curl -sSL -o /tmp/docker-downloads/packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb \
+    && dpkg -i /tmp/docker-downloads/packages-microsoft-prod.deb \
+    && apt-get update && apt-get install -y --no-install-recommends dotnet-runtime-2.1 \
+    && rm -rf /tmp/docker-downloads
 
 ARG DEBIAN_FRONTEND=interactive

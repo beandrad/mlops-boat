@@ -6,5 +6,8 @@ tfplan
 # secrets
 .env
 
+# .net packages
+*.deb
+
 main.tf.example
 
