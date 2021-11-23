@@ -39,6 +39,12 @@ variable "subnet_address_space" {
   default     = ["10.0.1.0/24"]
 }
 
+variable "bastion_subnet_address_space" {
+  description = "IP address space for the bastion subnet"
+  type        = list(string)
+  default     = ["10.0.3.0/24"]
+}
+
 # TODO: the build agent should be in the same vnet;
 # the vnet should be an input.
 variable "build_agent_ip" {
