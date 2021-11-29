@@ -34,7 +34,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.inetA.id]
-  size                  = "Standard_A1_v2"
+  size                  = "Standard_D4s_v3"
   admin_username        = "isa"
 
   admin_ssh_key {

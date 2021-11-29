@@ -45,10 +45,7 @@ variable "bastion_subnet_address_space" {
   default     = ["10.0.3.0/24"]
 }
 
-# TODO: the build agent should be in the same vnet;
-# the vnet should be an input.
-variable "build_agent_ip" {
-  description = "IP of agent provisioning infra"
-  type        = string
-  default     = "82.1.101.43"
+variable "key_vault_id" {
+  description = "Key vault id"
+  type = string
 }
