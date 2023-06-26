@@ -87,7 +87,7 @@ resource "azurerm_private_endpoint" "mlws" {
   }
 
   # Note: ML workspace has a DNS configuration for a public endpoint that needs to be overriden.
-  private_dns_zone_group {
+  private_dns_zone_group 
     name                 = azurecaf_name.mlws-pe.result
     private_dns_zone_ids = [azurerm_private_dns_zone.mlws-api.id, azurerm_private_dns_zone.mlws-nb.id]
   }

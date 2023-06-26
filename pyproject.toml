@@ -48,6 +48,7 @@ disallow_subclassing_any = false
 explicit_package_bases = true
 
 [tool.flake8]
+exclude = ".venv"
 max-line-length = 110
 max-complexity = 10
 
